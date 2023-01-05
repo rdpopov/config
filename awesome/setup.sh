@@ -6,5 +6,6 @@ sudo apt install \
       numlockx \
       conky-all \
       policykit-1 \
-      i3lock-fancy
+      i3lock-fancy \
+      xbacklight
       # blueberry \

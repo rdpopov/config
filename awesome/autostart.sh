@@ -17,7 +17,8 @@ run xfce4-power-manager
 run /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 run numlockx on
 run volumeicon
-run xautolock -time 5 -detectsleep -locker i3lock-fancy -notify 30
+feh --bg-fill $HOME/.config/awesome/wall/woods.png
+run xautolock -detectsleep -time 5 -locker i3lock-fancy
 #run nitrogen --restore
 # run conky $HOME/.config/awesome/system-overview
 #you can set wallpapers in themes as well
