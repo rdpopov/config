@@ -15,6 +15,7 @@
 local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
 local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
 
+
 --https://awesomewm.org/doc/api/documentation/05-awesomerc.md.html
 -- Standard awesome library
 local gears         = require("gears") --Utilities such as color parsing and objects
@@ -22,7 +23,7 @@ local awful         = require("awful") --Everything related to window managment
                       require("awful.autofocus")
 -- Widget and layout library
 local wibox         = require("wibox")
-
+local actual_brightness = 1
 -- Theme handling library
 local beautiful     = require("beautiful")
 
@@ -672,10 +673,30 @@ globalkeys = my_table.join(
               --{description = "show weather", group = "widgets"}),
 
     -- Brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
+
+    awful.key({},"XF86MonBrightnessUp", function()
+            actual_brightness = (actual_brightness + 0.1)
+            if actual_brightness > 1 then 
+                actual_brightness = 1
+            end
+            awful.spawn.with_shell([[xrandr --output eDP-1 --brightness ]] .. actual_brightness + .1) -- increase 5% 
+    end,
               {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
+
+    awful.key({},"XF86MonBrightnessDown", function()
+            actual_brightness = (actual_brightness - 0.1)
+            if actual_brightness < 0.1 then 
+                actual_brightness = 0.1
+            end
+            awful.spawn.with_shell([[xrandr --output eDP-1 --brightness ]] .. actual_brightness) -- increase 5% 
+    end,
               {description = "-10%", group = "hotkeys"}),
+
+
+    -- awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
+    --           {description = "+10%", group = "hotkeys"}),
+    -- awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
+    --           {description = "-10%", group = "hotkeys"}),
 
     -- ALSA volume control
     --awful.key({ modkey1 }, "Up",
