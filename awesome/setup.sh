@@ -7,5 +7,5 @@ sudo apt install \
       conky-all \
       policykit-1 \
       i3lock-fancy \
-      xbacklight
+      xautolock 
       # blueberry \
